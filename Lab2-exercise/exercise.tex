@@ -11,6 +11,7 @@
 \usepackage{xurl}
 %---------------------------------------------------
 
+\usepackage[inline]{enumitem}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
@@ -85,6 +86,7 @@ type. List the 10 bits assigned to the a signal.
     \item \texttt{"0101010101"}
     \item \texttt{"1010000101"}
 \end{enumerate}
+
 \section{3.6}\label{3.6}
 Assume that \texttt{a} and \texttt{y} are 8-bit signals with the \texttt{std\_logic\_vector(7 downto 0)}
 data type. If the signals are interpreted as unsigned numbers, the following assignment
@@ -92,6 +94,18 @@ statement performs \texttt{a / 8}. Explain.
     
 \texttt{y <= “000” \& a (7 downto 3);}   
 \subsection{answer}
+Shifting the binary numbers does multiplication or division by 2 depending on the direction of the shift operation. 
+\begin{itemize*}
+    \item Left: $number \times 2$
+    \item right: $\frac{number}{2}$
+\end{itemize*}
+
+In the question, we've got division so we must do a right shift, but how many shifts are needed? $\log_2 8 = 3$. So we have to do the right shift 3 times.
+
+In shifting the unsigned numbers, we don't care about the last digit because it is not the \textit{sign} of the number, so we insert zero for each shift.
+
+In the question, we have concatenated 3 zeros with the rest of the number (5 digits that are still present and not thrown away).
+
 \section{3.7}    
 Assume the same \texttt{a} and \texttt{y} signals in Problem \nameref{3.6}. We want to perform \texttt{a mod 8} and
 assign the result to \texttt{y}. Rewrite the previous signal assignment statement using only the \&
