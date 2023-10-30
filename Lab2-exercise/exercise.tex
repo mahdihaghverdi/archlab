@@ -147,6 +147,7 @@ In order to do it only with concatenation in VHDL, we have to keep 3 bits ($log_
 \begin{lstlisting}
 y <= "00000" & a(2 downto 0)
 \end{lstlisting}
+
 \section{3.8}    
  Assume that the following double-quoted strings are with the \texttt{std\_logic\_vector}
 data type. Determine whether the relational operation is syntactically correct. If yes, what
@@ -159,6 +160,14 @@ is the result (i.e., \texttt{true} or \texttt{false})?
     \item \texttt{1010 > "1010"}
 \end{enumerate}
 \subsection{Answer}
+
+\begin{enumerate}[label=(\alph*)]
+    \item \texttt{false}
+    \item \texttt{false}
+    \item \textbf{type mismath}
+    \item \textbf{type mismath}
+\end{enumerate}
+
 \section{3.11}    
 Determine whether the following signal assignment is syntactically correct. If not,
 use the proper conversion function and type casting to correct the problem.
