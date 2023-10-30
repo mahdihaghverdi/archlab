@@ -16,6 +16,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{xcolor}
+\usepackage{float}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -40,6 +41,7 @@
 }
 
 \usepackage{enumitem}
+\newenvironment{allintypewriter}{\ttfamily}{\par}
 
 \title{Exercises}
 \author{Mahdi Haghverdi}
@@ -57,7 +59,7 @@ shown below. Use only the \texttt{std\_logic} or \texttt{std\_logic\_vector} dat
     \item  bit: bidirectional data bus
 \end{itemize}
 
-\subsection{answer}
+\subsection{Answer}
 \begin{lstlisting}
 library ieee;
 use ieee.std_logic_1164.all;
@@ -76,11 +78,11 @@ Assume that \texttt{a} is a 10-bit signal with the \texttt{std\_logic\_vector(9 
 type. List the 10 bits assigned to the a signal.
 
 \begin{enumerate}[label=(\alph*)]
-    \item \texttt{a <= (others=>’1’);}
-    \item \texttt{a <= (1|3|5|7|9=>’1’, others=>’O’);}
-    \item \texttt{a <= (9|7|2=>’1’, 6=>’0’, O=>’1’ , 1|5|8=>’0’, 3|4=>’0’);}
+    \item \texttt{a <= (others=>'1');}
+    \item \texttt{a <= (1|3|5|7|9=>'1', others=>'O');}
+    \item \texttt{a <= (9|7|2=>'1', 6=>'0', O=>'1', 1|5|8=>'0', 3|4=>'0');}
 \end{enumerate}
-\subsection{answer}
+\subsection{Answer}
 \begin{enumerate}[label=(\alph*)]
     \item \texttt{"1111111111"}
     \item \texttt{"0101010101"}
@@ -91,9 +93,12 @@ type. List the 10 bits assigned to the a signal.
 Assume that \texttt{a} and \texttt{y} are 8-bit signals with the \texttt{std\_logic\_vector(7 downto 0)}
 data type. If the signals are interpreted as unsigned numbers, the following assignment
 statement performs \texttt{a / 8}. Explain.
-    
-\texttt{y <= “000” \& a (7 downto 3);}   
-\subsection{answer}
+
+\begin{lstlisting}
+y <= "000" & a(7 downto 3);
+\end{lstlisting}
+
+\subsection{Answer}
 Shifting the binary numbers does multiplication or division by 2 depending on the direction of the shift operation. 
 \begin{itemize*}
     \item Left: $number \times 2$
@@ -110,7 +115,38 @@ In the question, we have concatenated 3 zeros with the rest of the number (5 dig
 Assume the same \texttt{a} and \texttt{y} signals in Problem \nameref{3.6}. We want to perform \texttt{a mod 8} and
 assign the result to \texttt{y}. Rewrite the previous signal assignment statement using only the \&
 operator.
-\subsection{answer}
+\subsection{Answer}
+Taking \texttt{number mod $2^n$} is equivalent to stripping off all but the n lowest-order (right-most) bits of \texttt{number}.
+
+For example
+
+\begin{table}[H]
+\begin{center}
+    \begin{tabular}{|c|c|}
+        \hline
+        \texttt{number} & \texttt{number \% 4} \\
+        \hline
+        \texttt{00000001} & \texttt{00000001} \\
+        \hline
+        \texttt{00000010} & \texttt{00000010 }\\
+        \hline
+        \texttt{00000011} & \texttt{00000011} \\
+        \hline
+        \texttt{00000100} & \texttt{00000000} \\
+        \hline
+        \texttt{00000101} & \texttt{00000001} \\
+        \hline
+        \texttt{00000110} & \texttt{00000010} \\
+        \hline
+    \end{tabular}
+\end{center}
+\end{table}
+
+In order to do it only with concatenation in VHDL, we have to keep 3 bits ($log_2\, 8 = 3$) and make the rest bits to be zero.
+
+\begin{lstlisting}
+y <= "00000" & a(2 downto 0)
+\end{lstlisting}
 \section{3.8}    
  Assume that the following double-quoted strings are with the \texttt{std\_logic\_vector}
 data type. Determine whether the relational operation is syntactically correct. If yes, what
@@ -122,7 +158,7 @@ is the result (i.e., \texttt{true} or \texttt{false})?
     \item \texttt{2\#1010\# > "1010"}
     \item \texttt{1010 > "1010"}
 \end{enumerate}
-\subsection{answer}
+\subsection{Answer}
 \section{3.11}    
 Determine whether the following signal assignment is syntactically correct. If not,
 use the proper conversion function and type casting to correct the problem.
@@ -147,7 +183,7 @@ sg <= u3 - 1;
 s7 <= not sg;
 
 \end{lstlisting}
-\subsection{answer}
+\subsection{Answer}
 \section{3.12} 
 For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
@@ -163,7 +199,7 @@ signal amount: std_logic_vector(3 downto 0);
 dest <= shift_left(src, amount);
 
 \end{lstlisting}
-\subsection{answer}
+\subsection{Answer}
 \section{3.13}    
 For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
@@ -177,7 +213,7 @@ signal amount: std_logic_vector(3 downto 0);
 ...
 dest <= src sll amount;   
 \end{lstlisting}
-\subsection{answer}
+\subsection{Answer}
 \section{3.14}    
  For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
