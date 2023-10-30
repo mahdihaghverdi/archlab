@@ -167,7 +167,7 @@ end tb ;
     \includegraphics[width=\textwidth, height=0.5\textheight]{ctb}
 \end{center}
 
-\subsubsection{Explanation}
+\subsection{Explanation}
 In the \texttt{UUT} entity of the test bench, we first use the full adder that we wrote, and then concurrently, we pass the commented truth table to the inputs of the full adder, the desired output should exists on the GTKWave output, in which it is.
 
 \newpage
@@ -269,7 +269,7 @@ end tb ;
     \includegraphics[width=0.8\textwidth, height=0.4\textheight]{tb}
 \end{center}
 
-\subsubsection{Explanation}
+\subsection{Explanation}
 Process-based testing is another approach of writing \texttt{VHDL} test bench.
 
 After instantiating the full adder that we wrote, we create a process named \texttt{tb1}. With the period of \texttt{20 ns} which is defined as \texttt{constant}, we pass eight diffrent inputs to the full adder.
