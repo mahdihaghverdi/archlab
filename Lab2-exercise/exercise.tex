@@ -240,9 +240,15 @@ signal src, dest: std_logic_vector(15 downto 0);
 signal amount: std_logic_vector(3 downto 0);
 ...
 dest <= shift_left(src, amount);
-
 \end{lstlisting}
 \subsection{Answer}
+\begin{lstlisting}
+dest <= std_logic_vector(
+    shift_left(unsigned(src), 
+    to_integer(unsigned(amount))
+  )
+)
+\end{lstlisting}
 \section{3.13}    
 For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
