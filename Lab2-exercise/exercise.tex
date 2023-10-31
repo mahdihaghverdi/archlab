@@ -263,6 +263,11 @@ signal amount: std_logic_vector(3 downto 0);
 dest <= src sll amount;   
 \end{lstlisting}
 \subsection{Answer}
+\begin{lstlisting}
+dest <= to_stdlogicvector(
+  to_bitvector(src) sll to_integer(unsigned(amount))
+)
+\end{lstlisting}
 \section{3.14}    
  For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
