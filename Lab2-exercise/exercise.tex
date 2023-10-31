@@ -193,6 +193,40 @@ s7 <= not sg;
 
 \end{lstlisting}
 \subsection{Answer}
+
+\begin{itemize}
+    \item \texttt{u1 <= 2\#0001\#} $\rightarrow$  \texttt{u1} is \texttt{unsigned} but \texttt{2\#0001\#} is \texttt{integer}.
+    
+    Correct: \texttt{to\_unsigned(2\#0001\#, 4)}
+    
+    \item \texttt{u2 <= u3 and u4} $\rightarrow$ \textbf{Correct}
+    
+    \item \texttt{u5 <= s1 + 1}  $\rightarrow$ \texttt{std\_logic\_vector} does not support \texttt{+}
+     
+     Correct: \texttt{u5 <= unsigned(s1) + 1}
+     
+    \item \texttt{u6 <= u3 + u4 + 3} $\rightarrow$ \textbf{Correct}
+    
+    \item \texttt{u7 <= (others=>'1')} $\rightarrow$ \textbf{Correct}
+    
+    \item \texttt{s2 <= s3 + s4 - 1} $\rightarrow$ \texttt{std\_logic\_vector} does not support \texttt{+}
+    
+    Correct: \texttt{s2 <= std\_logic\_vector(unsigned(s3) + unsigned(s4) - 1)}
+    
+    \item \texttt{s5 <= (others=>'1')} $\rightarrow$ \textbf{Correct}
+    
+    \item \texttt{s6 <= u3 and u4} $\rightarrow$ \texttt{unsigned} type does not support \texttt{and}
+    
+    Correct: \texttt{s6 <= std\_logic\_vector(u3) and std\_logic\_vector(u4)}
+    
+    \item \texttt{sg <= u3 - 1} $\rightarrow$ \texttt{unsigned} does not support minus operator AND the result should be \texttt{signed}
+     
+     Correct: \texttt{sg <= signed(u3) - 1}
+     
+    \item \texttt{s7 <= not sg} $\rightarrow$ \texttt{singed} does not support \texttt{not} operator
+    
+    Correct: \texttt{s7 <= not std\_logic\_vector(sg)}
+\end{itemize}
 \section{3.12} 
 For the following VHDL segment, correct the type mismatch with proper conversion
 function(s).
