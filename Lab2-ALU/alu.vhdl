@@ -42,8 +42,11 @@ begin
         when "0110" =>  -- and
             s <= a and b;
         when "0111" =>  -- or
+            s <= a or b;
         when "1000" =>  -- nor
+            s <= a nor b;
         when "1001" =>  -- xor
+            s <= a xor b;
         when others =>
             s <= (others => 'U');
     end case;
