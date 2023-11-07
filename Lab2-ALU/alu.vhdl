@@ -34,6 +34,11 @@ begin
                 s <= (others => '0');
             end if;
         when "0101" =>  -- sltu
+            if unsigned(a) < unsigned(b) then
+                s <= (0 => '1', others => '0');
+            else
+                s <= (others => '0');
+            end if;
         when "0110" =>  -- and
         when "0111" =>  -- or
         when "1000" =>  -- nor
