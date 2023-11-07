@@ -40,6 +40,7 @@ begin
                 s <= (others => '0');
             end if;
         when "0110" =>  -- and
+            s <= a and b;
         when "0111" =>  -- or
         when "1000" =>  -- nor
         when "1001" =>  -- xor
