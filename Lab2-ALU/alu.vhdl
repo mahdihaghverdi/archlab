@@ -24,7 +24,7 @@ begin
         when "0010" =>
             s <= std_logic_vector(signed(a) - signed(b));
         when others => -- 'U', 'X', '-', etc.
-            s <= "11111111111111111111111111111111";
+            s <= (others => 'U');
     end case;
 end process;
 end arch;
