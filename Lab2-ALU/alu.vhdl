@@ -24,6 +24,11 @@ begin
         when "0001" =>  -- addu
             s <= std_logic_vector(unsigned(a) + unsigned(b));
         when "0010" =>  -- sub
+            if signed(a) = signed(b) then
+                z <= '1';
+            else
+                z <= '0';
+            end if;
             s <= std_logic_vector(signed(a) - signed(b));
         when "0011" =>  -- subu
             s <= std_logic_vector(unsigned(a) - unsigned(b));
