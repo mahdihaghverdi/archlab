@@ -1,0 +1,5 @@
+run:
+   ghdl -a alu.vhdl
+   ghdl -a alu_tb.vhdl
+   ghdl -r alu_tb --vcd=alu_tb.vcd
+   gtkwave alu_tb.vcd
