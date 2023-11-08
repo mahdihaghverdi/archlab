@@ -13,11 +13,13 @@ entity ALU is
 end ALU;
 
 architecture arch of ALU is
-    signal temp, add, addu, sub, subu, slt, sltu, andx, orx, norx, xorx: std_logic_vector(31 downto 0);
 begin
 process(m, a, b) is
-constant zeros: std_logic_vector := "00000000000000000000000000000000";
 begin
+    z <= '0';
+    ovf <= '0';
+    c <= '0';
+
     case m is
         when "0000" =>  -- add
             s <= std_logic_vector(signed(a) + signed(b));
