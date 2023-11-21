@@ -11,6 +11,7 @@
 \usepackage{xurl}
 %---------------------------------------------------
 
+\usepackage{float}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{color}
@@ -90,7 +91,34 @@
 خروجی را روی 
 \lr{\texttt{dout}}
 قرار می‌دهد.
+
 \subsection{فایل \lr{romram}}
+این فایل در واقع کل پروژه و کد این شکل است:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=0.7\textwidth, height=0.3\textheight]{images/project}
+\end{center}
+\end{figure}
+چرا کد این شکل است؟
+
+چون در کد مشاهده‌ می‌شود که مشخصا موجودیت‌های 
+\lr{\texttt{rom8x8}}
+،
+\lr{\texttt{clock\_divide}}
+و
+\lr{\texttt{bram8x8}}
+در آن به عنوان یک 
+\lr{component}
+استفاده شده‌اند (که موجودیت‌هایی هستند که در شکل وجود دارند، البته مالتی پلکسری که در شکل است در قسمت معماری همین فایل تعریف شده است).
+
+کد شامل یک موجودیت به نام
+\lr{\texttt{romram}}
+و یک معماری به نام
+\lr{\texttt{structural}}
+است.
+
+\subsubsection{موجودیت \lr{\texttt{romram}}}
+\subsubsection{معماری \lr{\texttt{structural}}}
 
 \subsection{فایل \lr{clockDevider}}
 
