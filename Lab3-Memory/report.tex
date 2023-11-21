@@ -49,8 +49,47 @@
 \tableofcontents
 
 \section{توضیحات فایل‌های تمرین}
-\subsection{فایل \lr{rom8x8}}
+\subsection{فایل \lr{\texttt{rom8x8}}}
+این فایل، ساده‌ترین فایل این تمرین است که شامل یک موجودیت به نام
+\lr{\texttt{rom8x8}}
+و یک معماری به نام 
+\lr{\texttt{behave}}
+است.
 
+\subsubsection{توضیحات موجودیت \lr{\texttt{rom8x8}}}
+این موجودیت شامل دو پورت است:
+\begin{itemize}
+\item 
+\lr{\texttt{addr}}
+
+این پورت یک ورودی 
+\lr{\texttt{std\_logic\_vector}} 
+۳ بیتی است که در واقع مقدار خروجی را تعیین می‌کند.
+
+\item 
+\lr{\texttt{dout}}
+
+این پورت هم یک پورت خروجی از نوع 
+\lr{\texttt{std\_logic\_vector}}
+۷ بیتی است که مقدار خروجی روی آن قرار می‌گیرد.
+\end{itemize}
+
+\subsubsection{توضیحات معماری \lr{\texttt{behave}}}
+این تنها معماری حاضر برای موجودیت 
+\lr{\texttt{rom8x8}}
+است که در واقع یک \lr{decoder} ۳ به ۸ است.
+
+مقادیری که برای خروجی انتخاب شده‌اند کاملا \lr{hard code} شده‌اند و این کاملا با نام موجودیت (که \lr{\texttt{rom}} است) هماهنگی دارد.
+
+در معماری از 
+\lr{language feature}
+عی به نام 
+\lr{\texttt{with ... select}}
+استفاده شده است که با توجه به مقدار 
+\lr{\texttt{addr}}
+خروجی را روی 
+\lr{\texttt{dout}}
+قرار می‌دهد.
 \subsection{فایل \lr{romram}}
 
 \subsection{فایل \lr{clockDevider}}
