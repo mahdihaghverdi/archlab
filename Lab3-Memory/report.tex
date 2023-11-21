@@ -150,8 +150,23 @@
 \end{itemize}
 
 \end{itemize}
-\subsubsection{معماری \lr{\texttt{structural}}}
 
+\subsubsection{معماری \lr{\texttt{structural}}}
+در قسمت معماری این فایل، ابتدا ۳ 
+\lr{component}ی 
+که در این پروژه استفاده شده‌اند، تعریف شده‌اند و پس از آن ۵ سینگال میانی تعریف و مقداردهی اولیه شده‌اند.
+ 
+در قسمت \lr{\texttt{begin}} این معماری، ابتدا ۳ \lr{component} بالا اصطلاحا 
+\lr{\texttt{port map}}
+شده و به سینگال‌های ورودی، میانی و خروجی وصل شده‌اند.
+
+معماری شامل یک \lr{\texttt{process}} است که به سیگنال 
+\lr{\texttt{clk\_1Hz}}
+حساس است. سپس این فرآیند برای هر یک کلاک با مقدار ۱، با توجه به ورودی \lr{\texttt{switch}} که ۰ باشد یا ۱، خروجی را به ترتیب با 
+\lr{\texttt{dout\_rom}}
+و یا
+\lr{\texttt{dout\_bram}}
+پر می‌کند. سپس فارغ از مقدار \lr{\texttt{switch}} یک شمارنده یا یکی اضافه می‌کند.
 \subsection{فایل \lr{clockDevider}}
 
 \end{document}
