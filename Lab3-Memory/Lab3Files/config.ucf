@@ -1,0 +1,10 @@
+NET "clk_100MHz" LOC = P50;
+NET "switch" LOC = P51;
+NET "leds[0]" LOC = P132;
+NET "leds[1]" LOC = P131;
+NET "leds[2]" LOC = P127;
+NET "leds[3]" LOC = P126;
+NET "leds[4]" LOC = P124;
+NET "leds[5]" LOC = P123;
+NET "leds[6]" LOC = P121;
+NET "leds[7]" LOC = P120;
