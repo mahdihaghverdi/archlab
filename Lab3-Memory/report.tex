@@ -16,6 +16,7 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage{xcolor}
+\usepackage{subfigure}
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -235,20 +236,28 @@
 \ref{fig:signal-changes}
 آورده شده‌اند.
 
-\begin{figure}[b]
-\begin{center}
-\includegraphics[width=0.90\textheight, height=0.15\textwidth, angle=90]{./images/input-switiches}
-\end{center}
-\caption{تغییرات در ورودی}
-\label{fig:input-changes}
-\end{figure}
+\subsection{تغییرات در کامپوننت \lr{\texttt{bram8x8}}}
+تغییرات لازم در تصویر 
+\ref{fig:bram8x8-changes}
+نشان داده شده‌اند.
 
 \begin{figure}[b]
 \begin{center}
-\includegraphics[width=0.90\textheight, height=0.2\textwidth, angle=90]{./images/signal-changes}
+\subfigure
+[ورودی‌ها]
+{\label{fig:input-changes}\includegraphics[width=0.90\textheight, height=0.15\textwidth, angle=90]{./images/input-switiches}
+}
+\hspace{5mm}
+\subfigure
+[سیگنال‌های میانی]
+{\label{fig:signal-changes}\includegraphics[width=0.90\textheight, height=0.2\textwidth, angle=90]{./images/signal-changes}}
+\hspace{5mm}
+\subfigure
+[\lr{\texttt{bram8x8}}]
+{\label{fig:bram8x8-changes}\includegraphics[width=0.90\textheight, height=0.3\textwidth, angle=90]{./images/bram8x8-changes}}
 \end{center}
-\caption{تغییرات در سیگنا‌ل‌های میانی}
-\label{fig:signal-changes}
+\caption{تغییرات در ورودی، سیگنال‌های میانی و \lr{\texttt{bram8x8}}}
+\label{fig:changes}
 \end{figure}
 \listoffigures
 \end{document}
