@@ -54,7 +54,7 @@
 \begin{document}
 \maketitle
 \tableofcontents
-
+\newpage
 \section{اتصال چهار \lr{7-Segment} به برد \lr{FPGA}}
 \begin{abstract}
 آیا ما از 4 عدد \lr{7-Segment} استفاده کنیم و هر \lr{7-Segment}، ۹ پایه احتیاج داشته باشد باید برای نمایش مقدار مورد نظر از 36 پایه fpga استفاده کنیم؟ \\
@@ -79,8 +79,54 @@
 
 \section{توضیح فایل‌های \lr{VHDL}}
 \subsection{فایل \lr{\texttt{clock\_divide.vhd}}}\label{sec:cd}
+این فایل مانند 
+\lr{\texttt{clock\_divide.vhd}}
+آزمایش قبلی‌ست.
+
 \subsection{فایل \lr{\texttt{decodeSevenSeg.vhd}}}\label{sec:dss}
+این فایل طبق جدولی که برای 
+\lr{7-Segment}های
+برد پازج، در وبسایت
+\LTRfootnote{\url{https://posedge.ir/1399/07/21/connect-7segment-to-fpga/}}
+آورده شده‌ است، ۱۶ مقدار ۰ تا ۹ و حروف
+\lr{a}
+تا 
+\lr{f}
+را توسط یک دیکودر ۴ به ۷ در خروجی قرار می‌دهد.
+
 \subsection{فایل \lr{\texttt{sevenSegment.vhd}}}\label{sec:ss}
+این فایل، فایل اصلی ماست. فایل از دو 
+\lr{component}
+عه 
+\lr{\texttt{clock\_divide}}
+و
+\lr{\texttt{decodeSevenSeg}}
+استفاده می‌کند.
+
+فایل ۳ فرایند دارد.
+\begin{itemize}
+\item 
+یک فلیپ فلاپ \lr{D}
+\item 
+بلوک \lr{next state}
+\item 
+بلوک \lr{output logic}
+
+این بلوک، بلوک مهم در این معماری‌ست.
+بر اساس خروجی فلیپ فلاپ، این بلوک تصمیم می‌گیرد که کدام یک از \lr{7-Segment}ها روشن شود. که از مقدار ۰۰ تا ۱۰ گرفته و قسمت \lr{else} آن، چهارمین \lr{7-Segment} را روشن می‌کند.
+
+در هر بلاک \lr{if}، \lr{elsif} و یا \lr{else} ابتدا آدرس \lr{7-Segement} روی سیگنال خروجی \lr{\texttt{an}} قرار می‌گیرد و سپس ۴ بیت از عددی که طبق 
+\lr{\texttt{decoderSevenSeg}}
+کد شده است را روی 
+\lr{\texttt{snum}}
+قرار می‌دهد و در نهایت خروجی 
+\lr{\texttt{decodesevenseg}}
+را روی سیگنال 
+\lr{\texttt{sseg}}
+قرار می‌دهد.
+\end{itemize}
+
+
 
 \section{چالش‌ها}
 در این قسمت به توضیح چالش‌های مطرح شده، می‌پردازیم.
