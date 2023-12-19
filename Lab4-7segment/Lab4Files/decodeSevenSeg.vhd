@@ -11,7 +11,8 @@ end decodeSevenSeg;
 architecture behave of decodeSevenSeg is
 begin
 with din select
-    dout <= "1000000" when "0000",  -- 0
+    dout <= "1111111" when "1111",  -- OFF
+            "1000000" when "0000",  -- 0
             "1111001" when "0001",  -- 1
             "0100100" when "0010",  -- 2
             "0110000" when "0011",  -- 3

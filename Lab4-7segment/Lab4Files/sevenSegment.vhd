@@ -29,8 +29,8 @@ end component;
 signal clk_100Hz: std_logic;
 signal s_reg: unsigned(1 downto 0) ;
 signal s_next: unsigned(1 downto 0);
-signal myNum: std_logic_vector(15 downto 0):= "1100010100110001";
-                                            --    C   5   3   1
+signal myNum: std_logic_vector(15 downto 0):= "1111010111110001";
+                                            --    X   5   X   1
 signal snum: std_logic_vector(3 downto 0);
 
 begin

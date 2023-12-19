@@ -97,7 +97,7 @@
 چون در زمان نوشتن این گزارش هنوز آزمایش را انجام نداده‌ایم عدد دقیق آن را نمیدانیم\RTLfootnote{در زمان آزمایش عدد آنها را روی فایل گزارش با خودکار می‌شود.} اما مکان‌ کد‌هایی که باید تغییر کنند در تصویر
 \ref{fig:cd}
 آمده‌اند.\RTLfootnote{پرانتز‌ها}
-\subsection{چالش دوم}
+\subsection{چالش دوم}\label{subsec:sec-chal}
 همانطور که در قسمت‌های
 \ref{sec:dss}
 و
@@ -106,7 +106,17 @@
 \ref{fig:135c}
 تغییراتی را اعمال کنیم. 
 \subsection{چالش سوم}
+برای خاموش کردن 
+\lr{7-Segment}ها
+(چون طبق کدی که به ما دادید، \lr{Common Cathode} هستند) باید تمامی ورودی‌های آنها را ۱ کنیم. پس همانطور که در تصویر 
+\ref{fig:dss-changes}
+مشخص است، یک شرط دیگر با مقدار ۱۱۱۱ اضافه می‌کنیم و خروجی را ۱۱۱۱۱۱۱ قرار می‌دهیم.
 
+سپس مقداری که در 
+\ref{subsec:sec-chal}
+تغییر دادیم با دوباره تغییر می‌دهیم و مانند تصویر
+\ref{fig:sseg-changes}
+بجای مقادیری که می‌خواهیم، ۱۱۱۱ می‌گذاریم تا خروجی آنها ۱۱۱۱۱۱۱ شود و خاموش شوند.
 \begin{figure}[b]
 \begin{center}
 \subfigure
@@ -118,7 +128,21 @@
 [عدد \lr{135C}]
 {\label{fig:135c}\includegraphics[width=0.90\textheight, height=0.143\textwidth, angle=90]{./images/135c}
 }
+\hspace{3mm}
+\subfigure
+[دیکودر]
+{\label{fig:dss-changes}\includegraphics[width=0.90\textheight, height=0.143\textwidth, angle=90]{./images/dss-changes}
+}
 \end{center}
+\caption{تغییرات \lr{\texttt{clock\_divide}}، \lr{\texttt{decodeSevenSeg}} و \lr{\texttt{sevenSegment}}}
+\end{figure}
+
+\begin{figure}[b]
+\begin{center}
+\includegraphics[width=0.90\textheight, height=0.148\textwidth, angle=90]{./images/sseg-changes}
+\end{center}
+\caption{تغییرات در \lr{\texttt{sevenSegment.vhd}}}
+\label{fig:sseg-changes}
 \end{figure}
 \listoffigures
 \end{document}
