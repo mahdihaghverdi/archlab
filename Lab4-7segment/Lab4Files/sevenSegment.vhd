@@ -28,8 +28,8 @@ end component;
 
 signal clk_100Hz: std_logic;
 signal s_reg: unsigned(1 downto 0) ;
-signal s_next: unsigned(1 downto 0);        -- 5432109876543210
-signal myNum: std_logic_vector(15 downto 0):= "1001010101110011";  -- 14169 in decimal; 3759 in hex 'cause of sseg
+signal s_next: unsigned(1 downto 0);
+signal myNum: std_logic_vector(15 downto 0):= "1001010101110011";
 signal snum: std_logic_vector(3 downto 0);
 
 begin
