@@ -74,8 +74,38 @@
 \lr{f} و
 \lr{g}
 مقدار صفر را نمایش میدهند و بعد از 8 میلی ثانیه (دلخواه) \lr{enable} دوم فعال و بقیه غیر فعال میشوند و پورتها مقدار دو را نمایش میدهند ، اگر همینگونه این کار ادامه یابد و تکرار شود چشم ما تنها مقادیر 2020 را خواهد دید تنها با تعداد پورت مصرفی کمتر.
-\end{abstract}
+\end{abstract}\label{abstract}
 ''به طور خلاصه در یک لحظه تنها یکی از \lr{7-Segment}ها، روشن است اما چون تعویض به سرعت اتفاق میوفتد، چشم ما توانایی دیدن روشن و خاموش شدن آنها را ندارد.``
+
 \section{توضیح فایل‌های \lr{VHDL}}
+\subsection{فایل \lr{\texttt{clock\_divide.vhd}}}\label{sec:cd}
+\subsection{فایل \lr{\texttt{decodeSevenSeg.vhd}}}\label{sec:dss}
+\subsection{فایل \lr{\texttt{sevenSegment.vhd}}}\label{sec:ss}
+
 \section{چالش‌ها}
+در این قسمت به توضیح چالش‌های مطرح شده، می‌پردازیم.
+
+\subsection{چالش اول}
+طبق توضیحاتی که در 
+(\ref{abstract})
+آمد، ما باید در فایل 
+\lr{\texttt{clock\_divide.vhd}}
+تغییراتی را اعمال کنیم که تعداد بار روشن شدن هر یک از 
+\lr{7-Segment}ها
+آنقدری زیاد بشود، که چشم انسان قابلیت تشخیص روشن خاموش شدن آنها را نداشته باشد.
+\textbf{این یعنی عدد‌هایی که در این فایل‌ هستند باید کوچک‌تر شوند تا سرعت خاموش روشن شدن افزایش یابد.}
+چون در زمان نوشتن این گزارش هنوز آزمایش را انجام نداده‌ایم عدد دقیق آن را نمیدانیم\RTLfootnote{در زمان آزمایش عدد آنها را روی فایل گزارش با خودکار می‌شود.} اما مکان‌ کد‌هایی که باید تغییر کنند در تصویر
+\ref{fig:cd}
+آمده‌اند.\RTLfootnote{پرانتز‌ها}
+\subsection{چالش سوم}
+
+\begin{figure}[b]
+\begin{center}
+\subfigure
+[تغییرات کلاک]
+{\label{fig:cd}\includegraphics[width=0.90\textheight, height=0.43\textwidth, angle=90]{./images/cd}
+}
+\end{center}
+\end{figure}
+\listoffigures
 \end{document}
