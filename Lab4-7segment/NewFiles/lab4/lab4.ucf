@@ -1,0 +1,13 @@
+NET"clk_100MHz"LOC=P50;
+NET "reset"    LOC = P51;
+NET "an[0]"     LOC = P46;
+NET "an[1]"     LOC = P45;
+NET "an[2]"     LOC = P41;
+NET "an[3]"     LOC = P32;
+NET "sseg[0]"   LOC = P47;
+NET "sseg[1]"   LOC = P43;
+NET "sseg[2]"   LOC = P34;
+NET "sseg[3]"   LOC = P40;
+NET "sseg[4]"   LOC = P35;
+NET "sseg[5]"   LOC = P44;
+NET "sseg[6]"   LOC = P30;
