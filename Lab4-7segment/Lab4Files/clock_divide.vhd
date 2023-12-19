@@ -20,14 +20,14 @@ begin
    end process;
    process(s_reg)
    begin
-      if(s_reg = 1e6) then
+      if(s_reg = (    )) then
          s_next <= (others => '0');
       else s_next <= s_reg + 1;
       end if;
    end process;
    process(s_next)
    begin
-      if(s_next < 5e5) then
+      if(s_next < (    )) then
          oeb_next <= '1';
       else oeb_next <= '0';
       end if;
