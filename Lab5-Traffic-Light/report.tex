@@ -11,6 +11,7 @@
 \usepackage{xurl}
 %---------------------------------------------------
 
+\usepackage{adjustbox}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -40,6 +41,9 @@
     identifierstyle=\color{black}
 }
 
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows}
+
 \usepackage{xepersian}
 \settextfont{Yas}
 
@@ -52,4 +56,55 @@
 \maketitle
 \tableofcontents
 \newpage
+
+\section{دیاگرام}
+\begin{latin}
+\begin{figure}[ht]
+\begin{center}
+\begin{adjustbox}{width=\textwidth}
+\begin{tikzpicture}
+[->,
+ >=stealth',
+ node distance=3cm,
+ every state/.style={thick,fill=gray!10,
+ initial text=$$},
+]
+
+
+\node[state, initial]     (start) {start};
+\node[state, below right=of start] (s0) {GaRbRw};
+\node[state, below right=of s0] (s1) {YaRbRw};
+\node[state, right=of s1] (s2) {RaGbRw};
+\node[state, above right=of s2] (s3) {RaYbRw};
+\node[state, above=of s3] (s4) {RaRbGw};
+\node[state, above left=of s4] (s5) {RaRbRw};
+\node[state, above right=of start] (s6) {All OFF};
+
+\draw
+(start)    edge[left, left]   node{rst=`0'} (s6)
+(start)    edge[right, left]   node{rst=`1'} (s0)
+
+(s6)  edge[bend left, above]   node{rst=`0'} (s5)
+(s5)  edge[bend left, below]   node{rst=`0'} (s6)
+
+(s0)  edge[right, left]  node{rst=`1'} (s1)
+(s1)  edge[right, below]  node{rst=`1'} (s2)
+(s2)  edge[right, right]  node{rst=`1'} (s3)
+(s3)  edge[below, right]  node{rst=`1'} (s4)
+(s4)  edge[right, right]  node{rst=`1'} (s5)
+(s5)  edge[right, right]  node{rst=`1'} (s0)
+(s6)  edge[left]  node{rst=`1'} (s0)
+
+(s0)   edge[loop left]         node{} (s0)
+(s1)   edge[loop below]         node{} (s1)
+(s2)   edge[loop below]         node{} (s2)
+(s3)   edge[loop right]         node{} (s3)
+(s4)   edge[loop right]         node{} (s4)
+(s5)   edge[loop above]         node{} (s5)
+(s6)   edge[loop above]         node{} (s6);
+\end{tikzpicture}
+\end{adjustbox}
+\end{center}
+\end{figure}
+\end{latin}
 \end{document}

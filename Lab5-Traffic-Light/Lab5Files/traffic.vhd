@@ -41,7 +41,7 @@ variable four_sec  : std_logic_vector(2 downto 0) := '100';
 begin
 	if rst = '0' then
 		if clk_1Hz'event and clk_1Hz = '1' then
-			if state /= s5 and state /=s6 then
+			if state /= s5 and state /= s6 then
 				state <= s5;
 				count <= "000";
 			end if;
@@ -127,8 +127,8 @@ begin
                         count <= "000";
                     end if;
                 when others =>
-                        state <= s0;
-                        count <= "000";
+                    state <= s0;
+                    count <= "000";
             end case;
         end if;
     end if;
@@ -139,21 +139,21 @@ begin
 case state is
 		-- Red Yellow Green, Red Yellow Green, Red Green
 		when s0 =>
-            lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
+lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
 		when s1 =>
-            lights <= "01010010"; -- Ya = 1, Rb = 1, Rw = 1
+lights <= "01010010"; -- Ya = 1, Rb = 1, Rw = 1
 		when s2 =>
-            lights <= "10000110"; -- Ra = 1, Gb = 1, Rw = 1
+lights <= "10000110"; -- Ra = 1, Gb = 1, Rw = 1
 		when s3 =>
-            lights <= "10001010"; -- Ra = 1, Yb = 1, Rw = 1
+lights <= "10001010"; -- Ra = 1, Yb = 1, Rw = 1
 		when s4 =>
-            lights <= "10010001"; -- Ra = 1, Rb = 1, Gw = 1
+lights <= "10010001"; -- Ra = 1, Rb = 1, Gw = 1
 		when s5 =>
-            lights <= "10010010"; -- Ra = 1, Rb = 1, Rw = 1
+lights <= "10010010"; -- Ra = 1, Rb = 1, Rw = 1
 		when s6 =>
-            lights <= "00000000"; -- All LEDs are off
+lights <= "00000000"; -- All LEDs are off
 		when others =>
-            lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
+lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
 end case;
 end process;
 end traffic; 
