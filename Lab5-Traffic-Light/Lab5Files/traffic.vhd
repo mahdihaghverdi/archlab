@@ -6,7 +6,7 @@ entity traffic is
     port (
         clk_100MHZ: in std_logic;
         rst: in std_logic;
-        lights: out std_logic_vector(7 downto 0)
+        LEDS: out std_logic_vector(7 downto 0)
     );
 end traffic;
 
@@ -45,7 +45,7 @@ begin
 				state <= s5;
 				count <= "000";
 			end if;
-			case state is 
+			case state is
 				when s5 =>
 					if count < one_sec then
 						state <= s5;
@@ -138,22 +138,14 @@ process(state)
 begin
 case state is
 		-- Red Yellow Green, Red Yellow Green, Red Green
-		when s0 =>
-lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
-		when s1 =>
-lights <= "01010010"; -- Ya = 1, Rb = 1, Rw = 1
-		when s2 =>
-lights <= "10000110"; -- Ra = 1, Gb = 1, Rw = 1
-		when s3 =>
-lights <= "10001010"; -- Ra = 1, Yb = 1, Rw = 1
-		when s4 =>
-lights <= "10010001"; -- Ra = 1, Rb = 1, Gw = 1
-		when s5 =>
-lights <= "10010010"; -- Ra = 1, Rb = 1, Rw = 1
-		when s6 =>
-lights <= "00000000"; -- All LEDs are off
-		when others =>
-lights <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
+		when s0 => LEDS <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
+		when s1 => LEDS <= "01010010"; -- Ya = 1, Rb = 1, Rw = 1
+		when s2 => LEDS <= "10000110"; -- Ra = 1, Gb = 1, Rw = 1
+		when s3 => LEDS <= "10001010"; -- Ra = 1, Yb = 1, Rw = 1
+		when s4 => LEDS <= "10010001"; -- Ra = 1, Rb = 1, Gw = 1
+		when s5 => LEDS <= "10010010"; -- Ra = 1, Rb = 1, Rw = 1
+		when s6 => LEDS <= "00000000"; -- All LEDs are off
+		when others => LEDS <= "00110010"; -- Ga = 1, Rb = 1, Rw = 1
 end case;
 end process;
-end traffic; 
+end traffic;
