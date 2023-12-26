@@ -176,6 +176,9 @@ architecture traffic of traffic is
 
     -- state counter
     signal count: std_logic_vector(2 downto 0);
+
+begin
+clock_divider: clock_divide port map (clk_100MHZ, clk_1Hz);
 \end{lstlisting}
 \end{latin}
 ابتدا
@@ -203,4 +206,98 @@ architecture traffic of traffic is
 \lr{state}ها
 جابجا می‌شویم.
 \end{itemize}
+
+\newpage
+اولین فرآیند
+\begin{latin}
+\begin{lstlisting}[firstnumber=29]
+process(clk_1Hz, rst)
+-- needed variables
+variable one_sec   : std_logic_vector(2 downto 0) := '001';
+variable two_sec   : std_logic_vector(2 downto 0) := '010';
+variable three_sec : std_logic_vector(2 downto 0) := '011';
+variable four_sec  : std_logic_vector(2 downto 0) := '100';
+
+begin
+	if rst = '1' then
+        if clk_1Hz'event and clk_1Hz = '1' then
+            case state is
+                when s0 =>
+                    if count < four_sec then
+                        state <= s0;
+                        count <= count + 1;
+                    else
+                        state <= s1;
+                        count <= "000";
+                    end if;
+                when s1 =>
+                    if count < two_sec then
+                        state <= s1;
+                        count <= count + 1;
+                    else
+                        state <= s2;
+                        count <= "000";
+                    end if;
+                when s2 =>
+                    if count < three_sec then
+                        state <= s2;
+                        count <= count + 1;
+                    else
+                        state <= s3;
+                        count <= "000";
+                    end if;
+                when s3 =>
+                    if count < one_sec then
+                        state <= s3;
+                        count <= count + 1;
+                    else
+                        state <= s4;
+                        count <= "000";
+                    end if;
+                when s4 =>
+                    if count < two_sec then
+                        state <= s4;
+                        count <= count + 1;
+                    else
+                        state <= s5;
+                        count <= "000";
+                    end if;
+                when s5 =>
+                    if count < one_sec then
+                        state <= s5;
+                        count <= count + 1;
+                    else
+                        state <= s6;
+                        count <= "000";
+                    end if;
+                when s6 =>
+                    if count < one_sec then
+                        state <= s6;
+                        count <= count + 1;
+                    else
+                        state <= s0;
+                        count <= "000";
+                    end if;
+                when others =>
+                    state <= s0;
+                    count <= "000";
+            end case;
+        end if;
+\end{lstlisting}
+\end{latin}
+
+این فرآیند، به کلاک ۱ هرتز و کلید \lr{\texttt{rst}} حساس است. سپس به اندازه‌ی مقدار ثانیه‌هایی که در فایل پروژه نوشته شده است، متغیر‌هایی تعریف می‌کنیم تا از آنها استفاده کنیم.
+
+این فرآیند یک بلاک \lr{\texttt{if}} بزرگ دارد که از بین ۰ و ۱ (مقادیر \lr{\texttt{rst}}) انتخاب می‌کند؛ اگر مقدار آن ۱ باشد، وارد حلقه‌ی بزرگ‌‌تر دیاگرام (\ref{digram}) می‌شویم.
+
+از بین 
+\lr{state}های
+\lr{s0}
+تا
+\lr{s6}
+با توجه به زمانی که برای هر کدام تعریف شده، چرخش انجام می‌دهیم.
+
+این فرآیند، وقتی که مقدار 
+\lr{\texttt{state}}
+را تغییر می‌دهد، فرآیند دیگر را بیدار می‌کند (فرآیند \ref{sec-prc}) که در ادامه به توضیح آن می‌پردازیم.
 \end{document}

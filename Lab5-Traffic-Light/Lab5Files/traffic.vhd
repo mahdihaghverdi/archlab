@@ -39,35 +39,7 @@ variable three_sec : std_logic_vector(2 downto 0) := '011';
 variable four_sec  : std_logic_vector(2 downto 0) := '100';
 
 begin
-	if rst = '0' then
-		if clk_1Hz'event and clk_1Hz = '1' then
-			if state /= s5 and state /= s6 then
-				state <= s5;
-				count <= "000";
-			end if;
-			case state is
-				when s5 =>
-					if count < one_sec then
-						state <= s5;
-						count <= count + 1;
-					else
-						state <= s6;
-						count <= "000";
-					end if;
-				when s6 =>
-					if count < one_sec then
-						state <= s6;
-						count <= count + 1;
-					else
-						state <= s5;
-						count <= "000";
-					end if;
-				when others =>
-					state <= s5;
-					count <= "000";
-            end case;
-			end if;
-    else  -- rst = '1'
+	if rst = '1' then
         if clk_1Hz'event and clk_1Hz = '1' then
             case state is
                 when s0 =>
@@ -129,6 +101,34 @@ begin
                 when others =>
                     state <= s0;
                     count <= "000";
+            end case;
+        end if;
+    else  -- rst = '0'
+        if clk_1Hz'event and clk_1Hz = '1' then
+			if state /= s5 and state /= s6 then
+				state <= s5;
+				count <= "000";
+			end if;
+			case state is
+				when s5 =>
+					if count < one_sec then
+						state <= s5;
+						count <= count + 1;
+					else
+						state <= s6;
+						count <= "000";
+					end if;
+				when s6 =>
+					if count < one_sec then
+						state <= s6;
+						count <= count + 1;
+					else
+						state <= s5;
+						count <= "000";
+					end if;
+				when others =>
+					state <= s5;
+					count <= "000";
             end case;
         end if;
     end if;
