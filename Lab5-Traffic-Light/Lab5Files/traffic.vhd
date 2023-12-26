@@ -4,9 +4,9 @@ use IEEE.STD_LOGIC_unsigned.all;
 
 entity traffic is
     port (
-        clk_100MHZ: in STD_LOGIC;
-        rst: in STD_LOGIC;
-        lights: out STD_LOGIC_VECTOR(7 downto 0)
+        clk_100MHZ: in std_logic;
+        rst: in std_logic;
+        lights: out std_logic_vector(7 downto 0)
     );
 end traffic;
 
@@ -20,17 +20,19 @@ architecture traffic of traffic is
 
     type state_type is (s0, s1, s2, s3, s4, s5, s6);
     signal state: state_type;
-    signal count: STD_LOGIC_VECTOR(2 downto 0);
+    signal count: std_logic_vector(2 downto 0);
     signal clk_1Hz: std_logic;
-    constant SEC4: STD_LOGIC_VECTOR(2 downto 0) := "100";
-    constant SEC3: STD_LOGIC_VECTOR(2 downto 0) := "011";
-    constant SEC2: STD_LOGIC_VECTOR(2 downto 0) := "010";
-    constant SEC1: STD_LOGIC_VECTOR(2 downto 0) := "001";
 
 begin
-clock_divider: clock_divide port map (clk_100MHZ,clk_1Hz);
+clock_divider: clock_divide port map (clk_100MHZ, clk_1Hz);
 
 process(clk_1Hz, rst)
+-- needed variables
+variable one_sec   : std_logic_vector(2 downto 0) := '001';
+variable two_sec   : std_logic_vector(2 downto 0) := '010';
+variable three_sec : std_logic_vector(2 downto 0) := '011';
+variable four_sec  : std_logic_vector(2 downto 0) := '100';
+
 begin
 	if rst = '0' then
 		if clk_1Hz'event and clk_1Hz = '1' then
@@ -40,7 +42,7 @@ begin
 			end if;
 			case state is 
 				when s5 =>
-					if count < SEC1 then
+					if count < one_sec then
 						state <= s5;
 						count <= count + 1;
 					else
@@ -48,7 +50,7 @@ begin
 						count <= "000";
 					end if;
 				when s6 =>
-					if count < SEC1 then
+					if count < one_sec then
 						state <= s6;
 						count <= count + 1;
 					else
@@ -58,13 +60,13 @@ begin
 				when others =>
 					state <= s5;
 					count <= "000";
-				end case;
+            end case;
 			end if;
-    else
+    else  -- rst = '1'
         if clk_1Hz'event and clk_1Hz = '1' then
             case state is
                 when s0 =>
-                    if count < SEC4 then
+                    if count < four_sec then
                         state <= s0;
                         count <= count + 1;
                     else
@@ -72,7 +74,7 @@ begin
                         count <= "000";
                     end if;
                 when s1 =>
-                    if count < SEC2 then
+                    if count < two_sec then
                         state <= s1;
                         count <= count + 1;
                     else
@@ -80,7 +82,7 @@ begin
                         count <= "000";
                     end if;
                 when s2 =>
-                    if count < SEC3 then
+                    if count < three_sec then
                         state <= s2;
                         count <= count + 1;
                     else
@@ -88,7 +90,7 @@ begin
                         count <= "000";
                     end if;
                 when s3 =>
-                    if count < SEC1 then
+                    if count < one_sec then
                         state <= s3;
                         count <= count + 1;
                     else
@@ -96,7 +98,7 @@ begin
                         count <= "000";
                     end if;
                 when s4 =>
-                    if count < SEC2 then
+                    if count < two_sec then
                         state <= s4;
                         count <= count + 1;
                     else
@@ -104,7 +106,7 @@ begin
                         count <= "000";
                     end if;
                 when s5 =>
-                    if count < SEC1 then
+                    if count < one_sec then
                         state <= s5;
                         count <= count + 1;
                     else
@@ -112,7 +114,7 @@ begin
                         count <= "000";
                     end if;
                 when s6 =>
-                    if count < SEC1 then
+                    if count < one_sec then
                         state <= s6;
                         count <= count + 1;
                     else
