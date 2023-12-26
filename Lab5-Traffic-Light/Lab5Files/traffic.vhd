@@ -18,10 +18,15 @@ architecture traffic of traffic is
         );
 	end component;
 
+    -- clock
+    signal clk_1Hz: std_logic;
+
+    -- states
     type state_type is (s0, s1, s2, s3, s4, s5, s6);
     signal state: state_type;
+
+    -- state counter
     signal count: std_logic_vector(2 downto 0);
-    signal clk_1Hz: std_logic;
 
 begin
 clock_divider: clock_divide port map (clk_100MHZ, clk_1Hz);
