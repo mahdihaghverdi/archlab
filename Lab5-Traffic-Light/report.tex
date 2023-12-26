@@ -57,7 +57,7 @@
 \tableofcontents
 \newpage
 
-\section{دیاگرام}
+\section{دیاگرام}\label{digram}
 \begin{latin}
 \begin{figure}[ht]
 \begin{center}
@@ -129,4 +129,78 @@
 \end{figure}
 
 \subsection{\lr{\texttt{traffic.vhdl}}}
+\subsubsection{موجودیت \lr{\texttt{traffic}}}
+\begin{latin}
+\begin{lstlisting}
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.STD_LOGIC_unsigned.all;
+
+entity traffic is
+    port (
+        clk_100MHZ: in std_logic;
+        rst: in std_logic;
+        LEDS: out std_logic_vector(7 downto 0)
+    );
+end traffic;
+\end{lstlisting}
+\end{latin}
+\begin{itemize}
+\item \lr{\texttt{clk\_100MHZ}}:
+کلاک ورودی از برد.
+
+\item \lr{\texttt{rst}}:
+دکمه‌ی \lr{K1}
+
+\item \lr{\texttt{LEDS}}:
+چراغ‌های \lr{LED}
+\end{itemize}
+\newpage
+معماری
+\begin{latin}
+\begin{lstlisting}[firstnumber=12]
+architecture traffic of traffic is
+    component clock_divide
+        port (
+            clk_in: in std_logic;
+            clk_out: out std_logic
+        );
+	end component;
+
+    -- clock
+    signal clk_1Hz: std_logic;
+
+    -- states
+    type state_type is (s0, s1, s2, s3, s4, s5, s6);
+    signal state: state_type;
+
+    -- state counter
+    signal count: std_logic_vector(2 downto 0);
+\end{lstlisting}
+\end{latin}
+ابتدا
+از موجودیت 
+\lr{\texttt{clock\_divider}}
+یک کامپوننت تعریف می‌کنیم تا بتوانیم از آن استفاده کنیم، سپس ۳ سیگنال تعریف می‌کنیم:
+\begin{itemize}
+\item \lr{\texttt{clk\_1Hz}}
+
+این سیگنال، مقدار خروجی کامپوننت 
+\lr{\texttt{clock\_divider}}
+را دریافت می‌کند.
+
+\item \lr{\texttt{state}}
+
+این سیگنال از نوع 
+\lr{\texttt{state\_type}}
+است که بالای سیگنال تعریف شده و مقادیر 
+\lr{state}های
+موجود در دیاگرام (\ref{digram}) را می‌تواند داشته باشد.
+
+\item \lr{\texttt{count}}
+
+سیگنالی برای شماره ثانیه‌ها؛ به کمک این سیگنال بین 
+\lr{state}ها
+جابجا می‌شویم.
+\end{itemize}
 \end{document}
