@@ -77,22 +77,26 @@
 \node[state, right=of s1] (s2) {RaGbRw};
 \node[state, above right=of s2] (s3) {RaYbRw};
 \node[state, above=of s3] (s4) {RaRbGw};
-\node[state, above left=of s4] (s5) {RaRbRw};
 \node[state, above right=of start] (s6) {All OFF};
+\node[state, above right=of s6] (s5) {RaRbRw};
+\node[state, above left=of s4] (s51) {RaRbRw};
+\node[state, above right=of s0] (s7) {RaRbNone};
+
 
 \draw
 (start)    edge[left, left]   node{rst=`0'} (s6)
 (start)    edge[right, left]   node{rst=`1'} (s0)
 
-(s6)  edge[bend left, above]   node{rst=`0'} (s5)
-(s5)  edge[bend left, below]   node{rst=`0'} (s6)
+(s6)  edge[bend left, left]   node{rst=`0'} (s5)
+(s5)  edge[bend left, right]   node{rst=`0'} (s6)
 
 (s0)  edge[right, left]  node{rst=`1'} (s1)
 (s1)  edge[right, below]  node{rst=`1'} (s2)
 (s2)  edge[right, right]  node{rst=`1'} (s3)
 (s3)  edge[below, right]  node{rst=`1'} (s4)
-(s4)  edge[right, right]  node{rst=`1'} (s5)
-(s5)  edge[right, right]  node{rst=`1'} (s0)
+(s4)  edge[right, right]  node{rst=`1'} (s51)
+(s51)  edge[right, right]  node{rst=`1'} (s7)
+(s7)  edge[right, right]  node{rst=`1'} (s0)
 (s6)  edge[left]  node{rst=`1'} (s0)
 
 (s0)   edge[loop left]          node{count < 4} (s0)
@@ -101,7 +105,9 @@
 (s3)   edge[loop right]         node{count < 1} (s3)
 (s4)   edge[loop right]         node{count < 1} (s4)
 (s5)   edge[loop above]         node{count < 1} (s5)
-(s6)   edge[loop above]         node{count < 1} (s6);
+(s51)   edge[loop above]         node{count < 1} (s51)
+(s7)   edge[loop above]         node{count < 1} (s7)
+(s6)   edge[loop left]         node{count < 1} (s6);
 \end{tikzpicture}
 \end{adjustbox}
 \end{center}
