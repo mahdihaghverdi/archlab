@@ -95,20 +95,20 @@
 (s5)  edge[right, right]  node{rst=`1'} (s0)
 (s6)  edge[left]  node{rst=`1'} (s0)
 
-(s0)   edge[loop left]         node{} (s0)
-(s1)   edge[loop below]         node{} (s1)
-(s2)   edge[loop below]         node{} (s2)
-(s3)   edge[loop right]         node{} (s3)
-(s4)   edge[loop right]         node{} (s4)
-(s5)   edge[loop above]         node{} (s5)
-(s6)   edge[loop above]         node{} (s6);
+(s0)   edge[loop left]          node{count < 4} (s0)
+(s1)   edge[loop below]         node{count < 2} (s1)
+(s2)   edge[loop below]         node{count < 3} (s2)
+(s3)   edge[loop right]         node{count < 1} (s3)
+(s4)   edge[loop right]         node{count < 1} (s4)
+(s5)   edge[loop above]         node{count < 1} (s5)
+(s6)   edge[loop above]         node{count < 1} (s6);
 \end{tikzpicture}
 \end{adjustbox}
 \end{center}
 \end{figure}
 \end{latin}
 
-در این دیاگرام، وضعیت‌های ماشین کشیده شده‌اند. یال‌های حلقه روی وضعیت‌ها میزان زمان ایستادن روی آن وضعیت هستند که وقتی در کلاس آزمایش انجام شد و اعداد آنها بدست آمد، نوشته می‌شوند.
+در این دیاگرام، وضعیت‌های ماشین کشیده شده‌اند. یال‌های حلقه روی وضعیت‌ها میزان زمان ایستادن روی آن وضعیت هستند.
 
 \section{توضیحات}
 در این قسمت توضیحاتی راجع به کد‌ها می‌دهیم.
@@ -172,7 +172,7 @@ architecture traffic of traffic is
     signal clk_1Hz: std_logic;
 
     -- states
-    type state_type is (s0, s1, s2, s3, s4, s5, s6);
+    type state_type is (s0, s1, s2, s3, s4, s5, s6, s7);
     signal state: state_type;
 
     -- state counter
@@ -268,12 +268,12 @@ begin
                         state <= s5;
                         count <= count + 1;
                     else
-                        state <= s6;
+                        state <= s7;
                         count <= "000";
                     end if;
-                when s6 =>
+                when s7 =>
                     if count < one_sec then
-                        state <= s6;
+                        state <= s7;
                         count <= count + 1;
                     else
                         state <= s0;
@@ -364,6 +364,7 @@ case state is
 		when s4 => LEDS <= "10010001"; -- Ra=1, Rb=1, Gw=1
 		when s5 => LEDS <= "10010010"; -- Ra=1, Rb=1, Rw=1
 		when s6 => LEDS <= "00000000"; -- All LEDs are off
+        when s7 => LEDS <= "10010000"; -- Ra=1, Rb=1, Rw=0
 		when others => LEDS <= "00110010"; -- Ga=1, Rb=1, Rw=1
 end case;
 end process;
