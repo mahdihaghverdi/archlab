@@ -184,6 +184,9 @@ architecture traffic of traffic is
     -- state counter
     signal count: std_logic_vector(2 downto 0);
 
+    -- helper counter for s7
+    signal hcount: std_logic_vector(0 downto 0);
+
 begin
 clock_divider: clock_divide port map (clk_100MHZ, clk_1Hz);
 \end{lstlisting}
@@ -273,6 +276,7 @@ begin
                     if count < one_sec then
                         state <= s5;
                         count <= count + 1;
+                        hcount <= "0";
                     else
                         state <= s7;
                         count <= "000";
@@ -286,9 +290,13 @@ begin
                         count <= "000";
                     end if;
                 when s6 =>
-                    if count < one_sec then
+                    if (count < one_sec) and (hcount > one_sec) then
                         state <= s6;
                         count <= count + 1;
+                    elsif hcount < one_sec then
+                        state <= s7;
+                        hcount <= hcount + 1;
+                        count <= "000";
                     else
                         state <= s0;
                         count <= "000";
@@ -378,7 +386,7 @@ case state is
 		when s4 => LEDS <= "10010001"; -- Ra=1, Rb=1, Gw=1
 		when s5 => LEDS <= "10010010"; -- Ra=1, Rb=1, Rw=1
 		when s6 => LEDS <= "00000000"; -- All LEDs are off
-        when s7 => LEDS <= "00000010"; -- Ra=0, Rb=0, Rw=0
+        when s7 => LEDS <= "00000010"; -- Ra=0, Rb=0, Rw=1
 		when others => LEDS <= "00110010"; -- Ga=1, Rb=1, Rw=1
 end case;
 end process;
